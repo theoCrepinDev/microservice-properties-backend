@@ -12,6 +12,10 @@ public class test {
 
     @PostMapping
     public String test(){
-        return "test";
+        try{
+            return "test";
+        }catch (Exception e){
+            return "ddd";
+        }
     }
 }
