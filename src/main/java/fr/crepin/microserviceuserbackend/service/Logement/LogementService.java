@@ -10,4 +10,6 @@ public interface LogementService {
     List<Logement> getAllLogements();
 
     Logement addLogement(LogementDto logement);
+
+    Logement getLogementById(String id);
 }

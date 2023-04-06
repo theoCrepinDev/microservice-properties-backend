@@ -2,16 +2,20 @@ package fr.crepin.microserviceuserbackend.controller;
 
 import fr.crepin.microserviceuserbackend.converter.LogementConverter;
 import fr.crepin.microserviceuserbackend.dao.entity.Logement;
+import fr.crepin.microserviceuserbackend.dao.entity.LogementOptions;
 import fr.crepin.microserviceuserbackend.dto.logement.LogementDto;
 import fr.crepin.microserviceuserbackend.dto.logement.PostLogementResponse;
 import fr.crepin.microserviceuserbackend.service.Logement.LogementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
+import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/logements")
+@RequestMapping("/api")
 @CrossOrigin(origins = "${front.url}")
 public class LogementController {
 
@@ -23,13 +27,13 @@ public class LogementController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/logements")
     public List<LogementDto> getAllLogements(){
         var logements = this.service.getAllLogements();
         return logements.stream().map(LogementConverter::logementToLogementDtoConverter).toList();
     }
 
-    @PostMapping
+    @PostMapping("/logement")
     public PostLogementResponse addLogement(@RequestBody  LogementDto logement){
         try{
             return PostLogementResponse
@@ -48,5 +52,12 @@ public class LogementController {
                     .build();
         }
 
+    }
+
+    @GetMapping("/logement")
+    public LogementDto getLogementById(
+            @RequestParam String id
+    ){
+        return LogementConverter.logementToLogementDtoConverter(service.getLogementById(id));
     }
 }
