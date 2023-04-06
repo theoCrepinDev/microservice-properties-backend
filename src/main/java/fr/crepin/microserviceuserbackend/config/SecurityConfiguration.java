@@ -47,6 +47,9 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers(HttpMethod.GET, "/**")
                 .permitAll()
+                .requestMatchers("/**")
+                .permitAll()
+        /**
                 .requestMatchers(HttpMethod.DELETE, "/press-articles", "/events")
                 .hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/press-articles", "/events")
@@ -55,6 +58,7 @@ public class SecurityConfiguration {
                 .hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
+         */
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
