@@ -70,4 +70,11 @@ public class LogementController {
     ){
         return LogementConverter.logementToLogementDtoConverter(service.getLogementById(id));
     }
+
+    @PutMapping("logement")
+    public LogementDto putLogement(
+            @RequestBody LogementDto logementDto
+    ){
+        return LogementConverter.logementToLogementDtoConverter(service.updateLogement(logementDto));
+    }
 }

@@ -60,4 +60,10 @@ public class LogementServiceImpl implements LogementService{
 
     }
 
+    @Override
+    public Logement updateLogement(LogementDto logementDto) {
+        Logement logement = LogementConverter.logementDtoToLogemetnConverter(logementDto);
+        return repository.save(logement);
+    }
+
 }

@@ -14,4 +14,6 @@ public interface LogementService {
     Logement getLogementById(String id);
 
     List<Logement> getUserLogement(String jwt);
+
+    Logement updateLogement(LogementDto logementDto);
 }

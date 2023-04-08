@@ -40,7 +40,7 @@ public class Logement {
     private List<LogementOptions> logementOptions;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", updatable = false)
     private UserData user;
 
     public Logement() {
