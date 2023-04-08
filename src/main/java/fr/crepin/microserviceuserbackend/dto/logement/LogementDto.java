@@ -23,4 +23,8 @@ public class LogementDto {
     private String description;
     private List<LogementPhotosDto> photos;
     private List<LogementOptionsDto> options;
+    private String adresse;
+    private int codePostal;
+    private String ville;
+    private String pays;
 }

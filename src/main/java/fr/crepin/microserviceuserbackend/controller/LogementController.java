@@ -7,6 +7,7 @@ import fr.crepin.microserviceuserbackend.dto.logement.LogementDto;
 import fr.crepin.microserviceuserbackend.dto.logement.PostLogementResponse;
 import fr.crepin.microserviceuserbackend.service.Logement.LogementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -28,8 +29,17 @@ public class LogementController {
     }
 
     @GetMapping("/logements")
-    public List<LogementDto> getAllLogements(){
+    public List<LogementDto> getAllLogements(
+    ){
         var logements = this.service.getAllLogements();
+        return logements.stream().map(LogementConverter::logementToLogementDtoConverter).toList();
+    }
+
+    @GetMapping("logements/me")
+    public List<LogementDto> getUserLogements(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String language
+    ){
+        var logements = this.service.getUserLogement(language.split(" ")[1]);
         return logements.stream().map(LogementConverter::logementToLogementDtoConverter).toList();
     }
 

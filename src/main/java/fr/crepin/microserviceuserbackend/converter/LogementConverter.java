@@ -34,6 +34,10 @@ public class LogementConverter {
                 .nbrEtages(logement.getNombreEtages())
                 .nbrPieces(logement.getNombrePieces())
                 .id(logement.getId().toString())
+                .adresse(logement.getAdresse())
+                .codePostal(logement.getCodePostal())
+                .ville(logement.getVille())
+                .pays(logement.getPays())
                 .photos(logement.getLogementPhotos().stream().map(LogementConverter::LogementPhotosToLogementPhotosDtoConverter).toList())
                 .options(logement.getLogementOptions() != null ? logement.getLogementOptions().stream().map(LogementConverter::logementOptionsToLogementOptionDtoConverter).toList(): Collections.emptyList())
                 .build();
@@ -62,6 +66,10 @@ public class LogementConverter {
         result.setNombreEtages(logementDto.getNbrEtages());
         result.setTitre(logementDto.getTitre());
         result.setNombrePieces(logementDto.getNbrPieces());
+        result.setAdresse(logementDto.getAdresse());
+        result.setPays(logementDto.getPays());
+        result.setVille(logementDto.getVille());
+        result.setCodePostal(logementDto.getCodePostal());
 
         logementDto.getPhotos().forEach(photo -> result.addPhoto(
                 logementPhotosDtoToLogementPhotos(photo)

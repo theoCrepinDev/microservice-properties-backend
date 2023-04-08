@@ -1,5 +1,6 @@
 package fr.crepin.microserviceuserbackend.service.Logement;
 
+import fr.crepin.microserviceuserbackend.config.JwtService;
 import fr.crepin.microserviceuserbackend.converter.LogementConverter;
 import fr.crepin.microserviceuserbackend.dao.entity.Logement;
 import fr.crepin.microserviceuserbackend.dao.repository.LogementRepository;
@@ -16,9 +17,12 @@ public class LogementServiceImpl implements LogementService{
 
     private LogementRepository repository;
 
+    private JwtService jwtService;
+
     @Autowired
-    public LogementServiceImpl(LogementRepository repository){
+    public LogementServiceImpl(LogementRepository repository, JwtService jwtService){
         this.repository = repository;
+        this.jwtService = jwtService;
     }
     public List<Logement> getAllLogements(){
         return repository.findAll();
@@ -43,6 +47,17 @@ public class LogementServiceImpl implements LogementService{
             throw new IllegalArgumentException("Logement not found with this id");
         }
         throw new IllegalArgumentException("Logement not found with this id");
+    }
+
+    @Override
+    public List<Logement> getUserLogement(String jwt) {
+        String username = jwtService.extractUsernameOrEmail(jwt);
+        try{
+            return repository.findByUsername(username);
+        }catch (Exception e){
+            throw new IllegalArgumentException("Error when getting logements for this user");
+        }
+
     }
 
 }

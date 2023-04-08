@@ -12,4 +12,6 @@ public interface LogementService {
     Logement addLogement(LogementDto logement);
 
     Logement getLogementById(String id);
+
+    List<Logement> getUserLogement(String jwt);
 }

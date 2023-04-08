@@ -25,36 +25,27 @@ public class Logement {
     private int prix;
     private String description;
 
+    private String adresse;
+
+    @Column(name = "code_postale")
+    private int codePostal;
+
+    private String ville;
+    private String pays;
+
     @OneToMany(targetEntity = LogementPhotos.class, mappedBy = "logement", cascade = CascadeType.ALL)
     private List<LogementPhotos> logementPhotos;
 
     @OneToMany(targetEntity = LogementOptions.class, mappedBy = "logement", cascade = CascadeType.ALL)
     private List<LogementOptions> logementOptions;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id")
+    private UserData user;
+
     public Logement() {
         logementPhotos = new ArrayList<>();
         logementOptions = new ArrayList<>();
-    }
-
-    public Logement(String titre, int nombrePieces, float taille, int nombreEtages, int prix, String description, List<LogementPhotos> role) {
-        this.titre = titre;
-        this.nombrePieces = nombrePieces;
-        this.taille = taille;
-        this.nombreEtages = nombreEtages;
-        this.prix = prix;
-        this.description = description;
-        this.logementPhotos = role;
-    }
-
-    public Logement(UUID id, String titre, int nombrePieces, float taille, int nombreEtages, int prix, String description, List<LogementPhotos> role) {
-        this.id = id;
-        this.titre = titre;
-        this.nombrePieces = nombrePieces;
-        this.taille = taille;
-        this.nombreEtages = nombreEtages;
-        this.prix = prix;
-        this.description = description;
-        this.logementPhotos = role;
     }
 
     public void addPhoto(LogementPhotos photo){
@@ -136,5 +127,37 @@ public class Logement {
 
     public void setLogementOptions(List<LogementOptions> logementOptions) {
         this.logementOptions = logementOptions;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public int getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(int codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getPays() {
+        return pays;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
     }
 }
