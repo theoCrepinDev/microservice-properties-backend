@@ -53,7 +53,7 @@ public class LogementConverter {
 
     public static LogementOptions logementOptionsDtoToLogementOptionsConverter(LogementOptionsDto logementOptionsDto){
         var result = new LogementOptions();
-        result.setNom(logementOptionsDto.getId() != null ? LogementOptionsEnum.valueOf(logementOptionsDto.getNom().toUpperCase()) : null);
+        result.setNom(LogementOptionsEnum.valueOf(logementOptionsDto.getNom().toUpperCase()));
         return result;
     }
 

@@ -27,6 +27,10 @@ public class JwtServiceImpl implements JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
+    public String extaractId(String token) {
+        var temp = extractAllClaims(token);
+        return temp.get("idu", String.class);
+    }
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         List<? extends GrantedAuthority> authorities = userDetails.getAuthorities().stream().toList();

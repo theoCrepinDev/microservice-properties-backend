@@ -44,14 +44,17 @@ public class LogementController {
     }
 
     @PostMapping("/logement")
-    public PostLogementResponse addLogement(@RequestBody  LogementDto logement){
+    public PostLogementResponse addLogement(
+
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String language,
+            @RequestBody  LogementDto logement){
         try{
             return PostLogementResponse
                     .builder()
                     .isValid(true)
                     .message("Logement ajouté avec succé")
                     .logementDto(
-                        LogementConverter.logementToLogementDtoConverter(service.addLogement(logement))
+                        LogementConverter.logementToLogementDtoConverter(service.addLogement(logement, language.split(" ")[1]))
                     )
                     .build();
         }catch (Exception e){

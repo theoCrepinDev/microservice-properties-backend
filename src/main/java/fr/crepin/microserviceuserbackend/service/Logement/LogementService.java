@@ -9,7 +9,7 @@ public interface LogementService {
 
     List<Logement> getAllLogements();
 
-    Logement addLogement(LogementDto logement);
+    Logement addLogement(LogementDto logement, String token);
 
     Logement getLogementById(String id);
 
